@@ -172,8 +172,6 @@ i would implement the following also
 - websocket for realtime commnications
 - cache invalidation
 
-## Stage 5
-
 to handle large number of notifications, i would use message using `queue` data structure 
 
 when notification is created it will be added to a queue instead of being processed immedietly
@@ -187,6 +185,31 @@ pros:
 - better scalability 
 - reduced server load
 - reliable notifications
+
+
+## Stage 5 
+
+## Issues
+
+The current implementation processes notification one by one which would be slow for the 50000 student
+
+if email delivery fails midway some student some receive the mail some of not
+
+## PseudoCode
+```
+function notify_all(student_ids, message):
+
+    save_to_db(student_ids, message)
+
+    for student_id in student_ids:
+        add_to_queue(student_id, message)
+        push_to_app(student_id, message)
+
+```
+
+
+
+
 
 
 
