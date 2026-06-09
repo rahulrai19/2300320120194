@@ -43,7 +43,7 @@ DELETE /api/notifications/:id
 
 flow 
 Backend -> socket.io -> connected student
-
+---
 
 ## Stage 2
 
@@ -108,7 +108,7 @@ WHERE id = 'notification-id';
 DELETE FROM notifications
 WHERE id = 'notification-id';
 ```
-
+---
 
 ## Stage 3
 
@@ -159,6 +159,22 @@ FROM notifications
 WHERE notification_type = 'Placement'
 AND created_at >= NOW() - INTERVAL '7 days';
 ```
+---
+
+## Stage 4
+
+To improve performance for million of user i will apply system designing where i use redis for cache 
+
+cache is instance storage where the notification is stored and used frequently when needed from the user side instead o calling database frequently 
+
+i would implement the following also 
+- pagination
+- websocket
+- cache invalidation
+
+
+
+
 
 
 
