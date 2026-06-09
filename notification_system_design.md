@@ -169,8 +169,29 @@ cache is instance storage where the notification is stored and used frequently w
 
 i would implement the following also 
 - pagination
-- websocket
+- websocket for realtime commnications
 - cache invalidation
+
+## Stage 5
+
+to handle large number of notifications, i would use message using `queue` data structure 
+
+when notification is created it will be added to a queue instead of being processed immedietly
+
+than notifications processed and delivered to user
+
+stored in the logging middleware 
+
+pros:
+- fast api response
+- better scalability 
+- reduced server load
+- reliable notifications
+
+
+
+
+
 
 
 
