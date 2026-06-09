@@ -17,16 +17,9 @@ function PriorityNotifications() {
 
   const loadNotifications = async () => {
     try {
-      let page = 1;
-      const allData = [];
-
-      while (true) {
-        const data = await fetchNotifications(page, 10);
-        if (!data || data.length === 0) break;
-        allData.push(...data);
-        if (data.length < 10) break;
-        page++;
-      }
+      const pageRequests = Array.from({ length: 10 }, (_, i) => fetchNotifications(i + 1, 10));
+      const pagesData = await Promise.all(pageRequests);
+      const allData = pagesData.flat().filter(Boolean);
 
       const weight = {
         Placement: 3,

@@ -6,7 +6,7 @@ export const fetchNotifications = async (
   limit = 10,
   type = ""
 ) => {
-  let url = `http://4.224.186.213/evaluation-service/notifications?page=${page}&limit=${limit}`;
+  let url = `/evaluation-service/notifications?page=${page}&limit=${limit}`;
 
   if (type) {
     url += `&notification_type=${type}`;
