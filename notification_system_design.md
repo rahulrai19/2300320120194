@@ -206,6 +206,22 @@ function notify_all(student_ids, message):
         push_to_app(student_id, message)
 
 ```
+## Stage 6
+
+I would calculate a score for every unread notification.
+
+Priority weights:
+
+- Placement = 3
+- Result = 2
+- Event = 1
+
+The final score is calculated using both notification type and recency.
+
+Notifications are sorted by score in descending order and the top 10 are displayed.
+
+To efficiently maintain the top 10 when new notifications arrive, I would recalculate the score for the new notification and update the sorted list
+
 
 
 
