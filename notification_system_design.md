@@ -110,21 +110,59 @@ WHERE id = 'notification-id';
 ```
 
 
+## Stage 3
 
+## Database Optimizations
+ans:-
 
+The query is correct fetches unread notifications for a student but and sort them by creation time
 
-## Components
-1. React Frontend
-2. Express Backend
-3. Logging Middleware
-## Flow
+## Reason slow
+
+The system now contains 50000 student and 5000000 notifications , 
+
+without proper indexing the database may need to scan a very large number of row before.
+
+sorted operation on created_at can also become expensive if many duplicate notification arrived
+
+## optimization ans
+
+i would create a composite index,
 ```
-Frontend -> Backend API
-
-Backend -> Logging Middleware
-
-Backend -> Frontend Response\
+CREATE INDEX idx_notifications_student_read_created
+ON notifications(student_id, is_read, created_at);
 ```
 
-## Logging
-`all api is working `
+This index helps because the query filters using:
+- student_id
+- is_read
+
+and sorted on created_at
+
+
+The database can directly use the index instead of scanning and sorting
+
+## Complexity 
+
+without index : O(N)
+with index : O(logN) faster
+
+Adding index at every index is not ideal 
+- storage need increases
+- slow insert,update etc
+- maintanance cost
+
+## Query question ans 
+```
+SELECT DISTINCT student_id
+FROM notifications
+WHERE notification_type = 'Placement'
+AND created_at >= NOW() - INTERVAL '7 days';
+```
+
+
+
+
+
+
+
