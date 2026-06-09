@@ -10,18 +10,18 @@ async function testLog() {
         stack: "backend",
         level: "info",
         package: "controller",
-        message: "Logging middleware initialized"
+        message: "Notificatin rec"
       },
       {
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization:`Bearer token ${token}`
         }
       }
     );
 
     console.log(response.data);
   } catch (error) {
-    console.log(error.response?.data || error.message);
+    console.log(error.response?.data||error.message);
   }
 }
 
